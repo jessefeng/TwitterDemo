@@ -26,11 +26,11 @@ const serverHandler = (req, res) => {
         res.setHeader('Content-type', 'application/json');
         
         //handle the tweet router
-        const tweetData = handlerTweetRouter(req, res);
-        if(tweetData){
-            res.end(JSON.stringify(tweetData));
-            return;
-        }
+        const blogResult = handlerTweetRouter(req, res);
+        blogResult.then((listresult)=> {
+            res.end(JSON.stringify(listresult));
+        })
+        return;
 
         //handle the user router
         const userProfileData = hanlderUserRouter(req, res);

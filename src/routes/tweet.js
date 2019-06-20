@@ -10,8 +10,10 @@ const handlerTweetRouter = (req, res) => {
     if(method === 'GET' && path === '/api/blog/list'){
         const author = req.queryParams.author || '';
         const keywords = req.queryParams.keywords || '';
-        const listData = getList(author, keywords);
-        return new SuccessModel(listData, 'this is the tweets list');
+        const result = getList(author, keywords);
+        return result.then((listdata) => {
+            return new SuccessModel(listdata, 'this is the tweet lists'); 
+        })
     }
     //get tweet detail 
     if(method === 'GET' && path === '/api/blog/detail'){
